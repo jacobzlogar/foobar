@@ -22,4 +22,4 @@ def answer(s):
     else:
         return
 
-# print(answer('abcabcabcabc'))
+print(answer('abcabcabcabc'))

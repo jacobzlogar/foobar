@@ -18,20 +18,30 @@
 
 
 def answer(l, t):
+
     result = []
     target = int(t)
-    for x in range(len(l)):
-        slice = l[:x+1]
-        if sum(slice) == target:
-            end_index = x + len(slice) - 1 
-            result.append(x)
-            result.append(end_index)
-            result.append(slice)
-        elif sum(slice) >= t:
-            return
-        for y in range(len(l)):
-            slice = l[x+1:]
-            print(slice)
+    total = xrange(len(l))
+    start_index = 0
 
-answer([4,3,5,7,8],12)
+    for _ in (total - start_index):
+        if start_index == 0:
+            slice = l[:]
+            print(xrange(len(slice)))
+            for i in xrange(len(slice)):
+                result = slice[:i+1]
+                print(result)
+                if sum(result) == target:
+                    print('bing')
+                if sum(result) > target:
+                    break
+            start_index += 1
+        else:
+            slice = l[start_index:]
+            print(xrange(len(slice)))
+            for i in xrange(len(slice)):
+                print(slice[:i])
+            start_index += 1
+
+answer([4, 3, 10, 2, 8],12)
 
