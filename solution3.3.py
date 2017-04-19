@@ -33,37 +33,28 @@ def answer(M, F):
     mach = int(M)
     facula = int(F)
 
-    if mach > facula:
-        mach = (mach - facula) * round(mach/facula)
-    elif facula > mach:
-        facula = (facula - mach) * round(facula/mach)
+    if facula > mach:
+        facula = facula - (mach * round(facula/mach)) 
+    print(mach - facula * range(31, 4))
 
-    result = reverse(1, mach, facula)
-
+    result = reverse(step, mach, facula)
     if not result:
         return "impossible"
-
     return result
 
 def reverse(step, M, F):
-    if is_valid(step, M, F):
-        if M == 1 and F == 1:
-            return step
-        elif M > F:
-            M = M - F
-            return reverse(step + 1, M, F)
-        elif F > M:
-            F = F - M
-            return reverse(step + 1, F, M)
+    if M and F == 1:
+        if step == 1:
+            return step 
         else:
-            return
-            
-
-def is_valid(step, m, f):
-    if step < 0:
-        if f == m:
-            return False
+            return step + 1
+    elif M > F:
+        M = M - F
+        return reverse(step + 1, M, F)
+    elif F > M:
+        F = F - M
+        return reverse(step + 1, F, M)
     else:
-        return True
-
-print(answer('9999', '10000'))
+        return
+            
+answer('2', '1')
