@@ -31,4 +31,18 @@
 #     (int list) [-1, -1]
 
 def answer(pegs):
-    print('blah')
+    start_distance = pegs[1] - pegs[0] - 1
+    for x in xrange(pegs[0], start_distance):
+        result = [x]
+        for peg in xrange(1, len(pegs)):
+            result.append(pegs[peg] - (pegs[peg-1] + result[-1]))
+        if x == 2 * result[-1]:
+            return [x, 1]
+        if x+1 == 2 * result[-1]:
+            return [(x * 3) + 1, 3]
+        if x+2 == 2 * result[-1]:
+            return [(x * 3) + 2, 3]
+    return [-1, -1]
+
+print(answer([4, 30, 50]))
+
