@@ -48,5 +48,6 @@
 # Output:
 #     (int list) [0, 3, 2, 9, 14]
 
+# Going to implement an absorbing markov chain to find the probabilities
 def answer(m):
     print(m)

@@ -29,6 +29,8 @@
 # Output:
 #     (string) "4"
 # 
+# needs optimization and more edge case tests i.e. big big ints
+# passes 2/5 tests #3, #5
 def answer(M, F):
     mach = int(M)
     facula = int(F)
