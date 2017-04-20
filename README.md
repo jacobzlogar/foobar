@@ -1,5 +1,7 @@
-# My Solutions To The Google Foobar Challenges
+# Google Foobar Challenge Solutions
 
-### Some challenges are missing the challenge text
+- Some challenges are missing the challenge text
 
-Educational purposes only. If you're taking the challenge seriously, you probably shouldn't use my answers!
+- Educational purposes only. 
+
+- If you're taking the challenge seriously, you probably shouldn't use my answers!
