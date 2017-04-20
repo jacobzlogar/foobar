@@ -100,10 +100,6 @@ def calc(count, m, f):
     facula = calc(count + 1, m, f - m)
     mach = calc(count + 1, m - f, f)
 
-    if mach == -1:
-        return facula
-    if facula == -1:
-        return mach
     if mach > facula:
         return mach
     else:
