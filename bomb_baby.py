@@ -59,12 +59,8 @@ def answer(M, F):
     facula = int(F)
 
     if mach > facula:
-        if mach - facula < 1:
-            return
         result = calc(1, mach - facula, facula)
     else:
-        if facula - mach < 1:
-            return
         result = calc(1, mach, facula - mach)
 
     if not result:
