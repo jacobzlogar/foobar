@@ -79,9 +79,6 @@ def calc(count, m, f):
             return -1
         return str(count)
         
-    if any(x < 1 for x in [m, f]):
-        return -1
-        
     if m == 1 or f == 1 and count > 1:
         if m == 1 and f - (m * f) == 0:
             return str(count + (f - m))
@@ -89,6 +86,11 @@ def calc(count, m, f):
             return str(count + (m - f))
         return
     
+    if all(x <= 0 for x in [m, f]):
+        return "impossible"
+    elif any(x <= 0 for x in [m, f]):
+        return
+
     # see if we can find a ratio here; multiply our count by that ratio to save iterations
     if f > 10^20 or m > 10^20:
         if m > f:
@@ -104,8 +106,6 @@ def calc(count, m, f):
     facula = calc(count + 1, m, f - m)
     mach = calc(count + 1, m - f, f)
 
-    if mach == -1 and facula == -1:
-        return "impossible"
     if mach == -1:
         return facula
     if facula == -1:
@@ -113,6 +113,5 @@ def calc(count, m, f):
     if mach > facula:
         return mach
     else:
-        return facula
-        print(answer('4', '7'))
-
+        return facula        
+print(answer('400000', '7'))
