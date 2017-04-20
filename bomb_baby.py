@@ -54,45 +54,62 @@
 # Output:
 #     (string) "4"
 # 
-
 def answer(M, F):
+
 
     mach = int(M)
     facula = int(F)
 
-    # reduce the number of results
-
     if mach > facula:
-        diff = mach - facula
-        count = int(round(diff/facula))
-        mach = mach - facula * count
-        result = reverse(count, mach, facula)
-
-    elif facula > mach:
-        diff = facula - mach
-        count = int(round(diff/mach))
-        facula = facula - mach * count
-        result = reverse(count, mach, facula)
+        result = calc(1, mach - facula, facula)
+    else:
+        result = calc(1, mach, facula - mach)
 
     if not result:
-        return "impossible"
- 
+        return 'impossible'
     return result
 
-def reverse(count, m, f):
-    if m == 1 and f == 1:
-        return str(count)
-    if is_valid(m, f):
-        if m > f:
-            m = m - f
-            return reverse(count + 1, m, f)
-        elif f > m:
-            f = f - m
-            return reverse(count + 1, m, f)
-     
-def is_valid(m, f):
-    if any(x <= 0 for x in [m, f]):
-        return False
 
-print(answer('2', '4'))
+def calc(count, m, f):
+
+    if m == f:
+        if m != 1:
+            return
+        if count == 1:
+            return str(count)
+
+    if m == 1 or f == 1 and count > 1:
+        if f - (m + 1) == m:
+            return str(count + (f - m))
+        if m - (f + 1) == f:
+            return str(count + (m - f))
+        return
+
+    if any(x < 1 for x in [m, f]):
+        return -1
+
+    # see if we can find a ratio here; multiply our count by that ratio to save iterations
+    if f - m > 20 or m - f > 20:
+        if m > f:
+            multiplier = round(m/f)
+            m1 = int(m - f * multiplier)
+            return calc(multiplier, m1, f)
+
+        elif f > m:
+            multiplier = round(f/m)
+            f1 = int(f - m * multiplier)
+            return calc(multiplier, m, f1)
+
+    facula = calc(count + 1, m, f - m)
+    mach = calc(count + 1, m - f, f)
+
+    if mach == -1:
+        return facula
+    if facula == -1:
+        return mach
+    if mach < facula:
+        return mach
+    else:
+        return facula
+print(answer('4', '7'))
 
