@@ -81,9 +81,7 @@ def calc(count, m, f):
         if f == 1 and m - (f * m) == 0:
             return str(count + (m - f))
         return
-    
-    if all(x <= 0 for x in [m, f]):
-        return "impossible"
+
     elif any(x <= 0 for x in [m, f]):
         return
 
