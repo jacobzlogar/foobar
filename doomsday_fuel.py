@@ -66,7 +66,69 @@
 #     (int) m = [[0, 1, 0, 0, 0, 1], [4, 0, 0, 3, 2, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
 # Output:
 #     (int list) [0, 3, 2, 9, 14]
-
-# Going to implement an absorbing markov chain to find the probabilities
 def answer(m):
-    print(m)
+    
+    height = len(m)
+    width = len(m[0])
+    matrix = list(m)
+    
+    sums = [sum(i) for i in matrix]
+    terms = [i for i, value in enumerate(sums) if value == 0]
+    not_terms = list((set(range(height)) - set(terms)))
+    nt_length = len(not_terms)
+
+    for key, value in enumerate(m):
+        value[key] = 0
+        
+    for i in xrange(0, nt_length - 1):
+        x = not_terms[nt_length - i - 1]
+        for j in xrange(0, nt_length - 1):
+            y = not_terms[j]        
+            matrix[y] = back(matrix[y], y, matrix[x] , x)
+            
+    result = []
+    
+    for i in terms:
+        result.append(matrix[0][i])
+        
+    total = sum(result)
+    result.append(total)
+    
+    if total == 0:
+        result = [1 for i in terms]
+        result.append(len(terms))
+        
+    return result
+
+def back(value1, i1, value2, i2):
+
+    lenV = len(value1)
+    indices = (set(range(lenV)) - {i1, i2})
+    sum2 = sum(value2)
+    output = [0 for i in value1]
+
+    for i in indices:
+        output[i]= sum2 * value1[i] + value1[i2] * value2[i]
+
+    gcd = gcd_l(output)
+    result = [int( i / gcd ) for i in output ]
+
+    return result
+    
+def greatest_common (x, y):
+
+    if (y == 0):
+        return x
+    else:
+        return greatest_common(y, x % y)
+         
+def gcd_l (l):
+
+    L = len(l)
+    result = 0
+
+    for i in range(0, L):
+        result = greatest_common(result, l[i])
+    return result
+
+print(answer([[0, 2, 1, 0, 0], [0, 0, 0, 3, 4], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]))
