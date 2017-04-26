@@ -111,7 +111,7 @@ def back(value1, i1, value2, i2):
         output[i]= sum2 * value1[i] + value1[i2] * value2[i]
 
     gcd = gcd_l(output)
-    result = [int( i / gcd ) for i in output ]
+    result = [int( i / gcd ) for i in output]
 
     return result
     
