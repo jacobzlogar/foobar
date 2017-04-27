@@ -25,15 +25,18 @@
 #
 # Inputs:
 # 
-# (string) s = "abccbaabccba" Output:
+# (string) s = "abccbaabccba" 
+#
+# Output:
 # 
 # (int) 2 Inputs:
 # 
-# (string) s = "abcabcabcabc" Output:
+# (string) s = "abcabcabcabc" 
+#
+# Output:
 # 
 # (int) 4
 
 def answer(s):
-    result = [s.count(s[:x]) for x in xrange(1, len(s)) if s[:x] * s.count(s[:x]) == s]
-    return max(result)
-print(answer('abccbaabccba'))
+    return max([s.count(s[:x]) for x in xrange(len(s)) if s[:x] * s.count(s[:x]) == s])
+print(answer('abcabcabcabc'))
